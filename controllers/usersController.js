@@ -8,7 +8,6 @@ export async function getUsers(req, res) {
     } catch (err) {
         res.status(500).json({
             message: "Failed to fetch users",
-            error: err,
         });
     }
 }
@@ -24,7 +23,6 @@ export async function getUserByEmail(req, res) {
     } catch (err) {
         res.status(500).json({
             message: "Failed to fetch user",
-            error: err,
         });
     }
 }
@@ -37,7 +35,6 @@ export async function addUser(req, res) {
     } catch (err) {
         res.status(500).json({
             message: "Failed to add user",
-            error: err,
         });
     }
 }
@@ -53,7 +50,6 @@ export async function updateUser(req, res) {
     } catch (err) {
         res.status(500).json({
             message: "Failed to update user",
-            error: err,
         });
     }
 }

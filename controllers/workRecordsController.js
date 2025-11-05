@@ -9,7 +9,6 @@ export async function getWorks(req, res) {
     } catch (err) {
         res.status(500).json({
             message: "Failed to fetch work records",
-            error: err,
         });
     }
 }
@@ -22,7 +21,6 @@ export async function addWork(req, res) {
     } catch (err) {
         res.status(500).json({
             message: "Failed to add Work record",
-            error: err,
         });
     }
 }
@@ -38,7 +36,6 @@ export async function updateWork(req, res) {
     } catch (err) {
         res.status(500).json({
             message: "Failed to update work record",
-            error: err,
         });
     }
 }
@@ -53,7 +50,6 @@ export async function deleteWork(req, res) {
     } catch (err) {
         res.status(500).json({
             message: "Failed to delete work record",
-            error: err,
         });
     }
 }
