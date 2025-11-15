@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./db/connect.js";
+import authRoutes from "./routes/auth.js";
 
 // Routes
 import userRoutes from "./routes/users.js";
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 });
 
 // Register Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/work-records", workRoutes);
 app.use("/api/payrolls", payrollRoutes);
