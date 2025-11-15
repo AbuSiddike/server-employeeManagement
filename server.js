@@ -4,6 +4,10 @@ import dotenv from "dotenv";
 import { connectDB } from "./db/connect.js";
 
 // Routes
+import userRoutes from "./routes/users.js";
+import workRoutes from "./routes/workRecords.js";
+import payrollRoutes from "./routes/payrolls.js";
+import contactRoutes from "./routes/contactMessages.js";
 
 dotenv.config();
 const app = express();
@@ -17,10 +21,10 @@ app.get("/", (req, res) => {
 });
 
 // Register Routes
-// app.use("/api/users", userRoutes);
-// app.use("/api/work-records", workRoutes);
-// app.use("/api/payrolls", payrollRoutes);
-// app.use("/api/contact-messages", contactRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/work-records", workRoutes);
+app.use("/api/payrolls", payrollRoutes);
+app.use("/api/contact-messages", contactRoutes);
 
 // Connect to Database and start Server
 const port = process.env.PORT || 5000;
