@@ -11,6 +11,22 @@ export async function getPayrolls(req, res) {
     }
 }
 
+export async function getMyPayrolls(req, res) {
+    try {
+        const db = getDB();
+        const email = req.user.email;
+
+        const payrolls = await db
+            .collection("payrolls")
+            .find({ employeeEmail: email })
+            .toArray();
+
+        res.json(payrolls);
+    } catch (err) {
+        res.status(500).json({ message: "Failed to fetch payrolls" });
+    }
+}
+
 export async function addPayroll(req, res) {
     try {
         const db = getDB();
