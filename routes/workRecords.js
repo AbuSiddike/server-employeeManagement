@@ -1,6 +1,7 @@
 import express from "express";
 import {
-    getWorks,
+    getAllWorks,
+    getMyWorks,
     addWork,
     updateWork,
     deleteWork,
@@ -10,10 +11,19 @@ import { verifyRole } from "../middlewares/verifyRole.js";
 
 const router = express.Router();
 
-// 
-router.get("/", verifyJwt, verifyRole("admin", "hr"), getWorks);
-router.post("/", verifyJwt, verifyRole("hr"), addWork);
-router.patch("/:id", verifyJwt, verifyRole("admin"), updateWork);
-router.delete("/:id", verifyJwt, verifyRole("admin"), deleteWork);
+// ADMIN & HR can view all work records
+router.get("/", verifyJwt, verifyRole("admin", "hr"), getAllWorks);
+
+// Employee can view only their own work records
+router.get("/my", verifyJwt, verifyRole("employee"), getMyWorks);
+
+// Employee can create their new work record
+router.post("/", verifyJwt, verifyRole("employee"), addWork);
+
+// Employee can update only their own work record
+router.patch("/:id", verifyJwt, verifyRole("employee"), updateWork);
+
+// Employee can delete only their own work record
+router.delete("/:id", verifyJwt, verifyRole("employee"), deleteWork);
 
 export default router;
