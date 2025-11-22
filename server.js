@@ -2,9 +2,11 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./db/connect.js";
-import authRoutes from "./routes/auth.js";
 
 // Routes
+import authRoutes from "./routes/auth.js";
+import stripeRoutes from "./routes/stripe.js";
+import stripeWebhookRoute from "./routes/stripeWebhook.js";
 import userRoutes from "./routes/users.js";
 import workRoutes from "./routes/workRecords.js";
 import payrollRoutes from "./routes/payrolls.js";
@@ -14,6 +16,11 @@ dotenv.config();
 const app = express();
 
 app.use(cors());
+app.use(
+    "/api/stripe/webhook",
+    express.raw({ type: "application/json" }),
+    stripeWebhookRoute
+);
 app.use(express.json());
 
 // Test Route
@@ -23,6 +30,7 @@ app.get("/", (req, res) => {
 
 // Register Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/stripe", stripeRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/work-records", workRoutes);
 app.use("/api/payrolls", payrollRoutes);
